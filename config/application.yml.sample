@@ -12,3 +12,4 @@
 MOCKSTAGRAM_SERVER_URL: 'http://localhost:3000'
 ELASTICSEARCH_SERVER_URL: 'http://localhost:9200'
 CACHE_SERVER_URL: 'redis://localhost:6379/0/cache'
+
