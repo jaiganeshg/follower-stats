@@ -4,6 +4,7 @@
 - bundler (If not available run gem install bundler)
 - Redis
 - Mockstargram server
+- Elastic search server
 
 ## To run
 - Install required libs `bundle install`
