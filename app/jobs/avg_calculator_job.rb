@@ -1,12 +1,15 @@
-class AvgCalculatorJob < ApplicationJob
+class AvgCalculatorJob
+  include Sidekiq::Worker
+
   def perform(influencer_stat)
-    cache_stat = CacheClient.get(influencer_stat.influencer_id)
-    avg = cache_stat[:avg]
-    count = cache_stat[:count]
+    puts influencer_stat
+    cache_stat = CacheClient.influencer_stat(influencer_stat['influencer_id'])
+    avg = cache_stat.avg
+    count = cache_stat.count
 
-    updated_avg = calcualte_avg(avg, count, influencer_stat.follower_count)
+    updated_avg = calcualte_avg(avg, count, influencer_stat['follower_count'])
 
-    CacheClient.update(influencer_stat.influencer_id, {avg: updated_avg, count: count+1})
+    CacheClient.update_stat(influencer_stat['influencer_id'], {avg: updated_avg, count: count+1})
   end
 
 
